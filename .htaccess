@@ -1,0 +1,11 @@
+Options -Indexes
+RewriteEngine On
+
+# Protect source and project documents from direct HTTP access.
+RewriteRule ^(?:app|database)(?:/|$) - [F,L,NC]
+RewriteRule ^CAHIER_DES_CHARGES_ORIENTATION_BJ.*\.pdf$ - [F,L,NC]
+
+# Keep real files (such as future public assets) directly accessible.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
